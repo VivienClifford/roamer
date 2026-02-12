@@ -69,6 +69,18 @@ class TestGetApiKey:
         with patch.dict(os.environ, {}, clear=True):
             with pytest.raises(ValueError, match="OpenAI API key must be provided"):
                 BaseAgent(name="TestAgent3")
+    
+    def test_api_key_passed_to_init_is_used(self):
+        """Should use API key passed to __init__ instead of environment variable."""
+        with patch.dict(os.environ, {}, clear=True):
+            agent = BaseAgent(name="TestAgent", api_key="passed-api-key")
+            assert agent.client is not None
+    
+    def test_api_key_from_env_when_not_passed(self):
+        """Should use environment variable when API key not passed to __init__."""
+        with patch.dict(os.environ, {"OPENAI_API_KEY": "env-api-key"}):
+            agent = BaseAgent(name="TestAgent")
+            assert agent.client is not None
 
 
 class TestCallOpenaiApi:

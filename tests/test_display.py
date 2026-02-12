@@ -1,7 +1,7 @@
 """Tests for display utilities."""
 import pytest
 from unittest.mock import Mock, patch, MagicMock
-from agents.display import display_travel_plan
+from agents.display import display_travel_plan, TravelPlanDisplay
 
 
 class TestDisplayTravelPlan:
@@ -166,3 +166,65 @@ class TestDisplayTravelPlan:
         
         # Should still display without crashing
         assert mock_st.metric.called or mock_st.subheader.called
+
+    @patch("agents.display.st")
+    def test_display_day_plan_no_duplicate_day_prefix(self, mock_st):
+        """Should not display duplicate 'Day' when title already includes day info."""
+        mock_col = MagicMock()
+        mock_st.columns.side_effect = lambda n: [mock_col] * n
+        mock_st.expander.return_value = MagicMock()
+        
+        plan_data = {
+            "details": {"location": "Test"},
+            "attractions": {"attractions": []},
+            "itinerary": {
+                "days": [
+                    {
+                        "day_number": "1",
+                        "title": "Day 1: Arrival in Queenstown",
+                        "activities": [],
+                        "meals": {},
+                        "notes": ""
+                    }
+                ]
+            },
+            "transport": {"transportation": []},
+            "errors": []
+        }
+        
+        display_travel_plan(plan_data)
+        
+        # Verify expander was called without duplicate "Day"
+        # Should be "Day 1: Arrival in Queenstown" not "Day Day 1: Arrival in Queenstown"
+        mock_st.expander.assert_called_with("Day 1: Arrival in Queenstown")
+
+    @patch("agents.display.st")
+    def test_display_day_plan_with_simple_title(self, mock_st):
+        """Should add 'Day X:' prefix when title is simple description."""
+        mock_col = MagicMock()
+        mock_st.columns.side_effect = lambda n: [mock_col] * n
+        mock_st.expander.return_value = MagicMock()
+        
+        plan_data = {
+            "details": {"location": "Test"},
+            "attractions": {"attractions": []},
+            "itinerary": {
+                "days": [
+                    {
+                        "day_number": "1",
+                        "title": "Arrival",
+                        "activities": [],
+                        "meals": {},
+                        "notes": ""
+                    }
+                ]
+            },
+            "transport": {"transportation": []},
+            "errors": []
+        }
+        
+        display_travel_plan(plan_data)
+        
+        # Verify expander was called with proper format
+        # Should be "Day 1: Arrival"
+        mock_st.expander.assert_called_with("Day 1: Arrival")

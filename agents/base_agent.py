@@ -22,7 +22,8 @@ class BaseAgent:
             api_key: OpenAI API key (uses environment variable if not provided)
         """
         self.name = name
-        api_key = self.get_api_key()
+        if not api_key:
+            api_key = self.get_api_key()
         self.client = OpenAI(api_key=api_key)
     
     def call_openai_api(
