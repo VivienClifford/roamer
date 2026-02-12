@@ -1,0 +1,15 @@
+[project]
+name = "roamer"
+version = "0.1.0"
+description = "AI-powered travel planning assistant using multi-agent architecture"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openai>=2.18.0",
+    "streamlit>=1.54.0",
+]
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-mock>=3.10.0",
+]
