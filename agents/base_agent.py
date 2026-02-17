@@ -33,6 +33,7 @@ class BaseAgent:
         model: str = DEFAULT_MODEL,
         temperature: float = 0.7,
         max_tokens: int = 1000,
+        use_json_response: bool = False,
     ) -> dict:
         """
         Make a call to the OpenAI API and return parsed JSON response.
@@ -48,15 +49,19 @@ class BaseAgent:
             Parsed JSON response or error dict
         """
         try:
-            response = self.client.chat.completions.create(
-                model=model,
-                messages=[
+            kwargs = {
+                "model": model,
+                "messages": [
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}
                 ],
-                temperature=temperature,
-                max_tokens=max_tokens
-            )
+                "temperature": temperature,
+                "max_tokens": max_tokens,
+            }
+            if use_json_response:
+                kwargs["response_format"] = {"type": "json_object"}
+            
+            response = self.client.chat.completions.create(**kwargs)
             
             response_text = response.choices[0].message.content
             

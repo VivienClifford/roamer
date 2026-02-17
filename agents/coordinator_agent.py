@@ -15,7 +15,6 @@ class CoordinatorAgent(BaseAgent):
 
 Identify: location (required), duration (days, default 3), interests (list), budget (low/medium/high), travel_type (solo/couple/family/group)
 
-MUST RETURN: Valid JSON ONLY (no markdown code blocks, no ```json wrappers).
 Example: {{"location": "Tokyo", "duration": 5, "interests": ["temples", "sushi"], "budget": "medium", "travel_type": "solo"}}"""
     
     def __init__(self, name: str, api_key: Optional[str] = None):

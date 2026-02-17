@@ -15,12 +15,10 @@ class LogisticAgent(BaseAgent):
 
 Plan considering: travel time, opening hours, meals, rest times, and activity levels.
 
-MUST RETURN: Valid JSON ONLY (no markdown code blocks, no ```json wrappers).
 JSON structure: {{"days": [{{"day_number": "string", "title": "string", "activities": [{{"time": "HH:MM", "activity": "string", "duration": "string"}}], "meals": {{"breakfast": "string", "lunch": "string", "dinner": "string"}}, "notes": "string"}}]}}"""
 
     TRANSPORTATION_PROMPT = """Provide practical transportation tips for visiting {location}. Include best ways to get around, costs, apps, and safety tips.
 
-MUST RETURN: Valid JSON ONLY (no markdown code blocks, no ```json wrappers).
 JSON structure: {{"transportation": [{{"method": "string", "description": "string", "cost_estimate": "string like $10-20/day", "recommended_for": "string"}}]}}"""
 
     def create_itinerary(self, location: str, duration: int, attractions: dict) -> dict:

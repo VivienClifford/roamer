@@ -13,7 +13,6 @@ class AttractionAgent(BaseAgent):
 Focus on these interests: {interests}. 
 Provide 3-5 recommendations with brief descriptions and estimated time needed for each.
 
-MUST RETURN: Valid JSON ONLY (no markdown code blocks, no ```json wrappers).
 JSON structure: {{"attractions": [{{ "name": "string", "description": "string", "hours_needed": "string like 2-3 hours", "category": "string" }}]}}"""
 
     def find_attractions(self, location: str, interests: list[str], duration: int) -> dict:
@@ -40,6 +39,7 @@ JSON structure: {{"attractions": [{{ "name": "string", "description": "string", 
             user_prompt=prompt,
             temperature=DEFAULT_TEMPERATURE,
             max_tokens=TOKENS_ATTRACTION,
+            use_json_response=True,
         )
         
         # Validate response structure
