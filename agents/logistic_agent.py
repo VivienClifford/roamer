@@ -15,6 +15,8 @@ class LogisticAgent(BaseAgent):
 
 Plan considering: travel time, opening hours, meals, rest times, and activity levels.
 
+IMPORTANT: For each day's "title" field, provide ONLY the main activity or theme (e.g., "Arrival", "Museum Day", "Beach Exploration") WITHOUT any day number prefix. The display layer will automatically format it as "Day N: Title".
+
 JSON structure: {{"days": [{{"day_number": "string", "title": "string", "activities": [{{"time": "HH:MM", "activity": "string", "duration": "string"}}], "meals": {{"breakfast": "string", "lunch": "string", "dinner": "string"}}, "notes": "string"}}]}}"""
 
     TRANSPORTATION_PROMPT = """Provide practical transportation tips for visiting {location}. Include best ways to get around, costs, apps, and safety tips.

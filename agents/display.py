@@ -117,33 +117,12 @@ class TravelPlanDisplay:
         """Display a single day's plan in an expander."""
         day_number = day_plan.get("day_number", "?")
         day_title = day_plan.get("title", "Day")
-        
-        expander_label = self._format_day_label(day_number, day_title)
+        expander_label = f"Day {day_number}: {day_title}"
         
         with st.expander(expander_label):
             self._display_day_activities(day_plan)
             self._display_day_meals(day_plan)
             self._display_day_notes(day_plan)
-    
-    @staticmethod
-    def _format_day_label(day_number: str, day_title: str) -> str:
-        """
-        Format the day label for display, preventing duplicate "Day" prefix.
-        
-        Args:
-            day_number: The day number (e.g., "1", "2")
-            day_title: The day title or description
-        
-        Returns:
-            Formatted label (e.g., "Day 1: Arrival" or "Day 1: Arrival in Queenstown")
-        """
-        # Prevent duplicate "Day" prefix if title already contains day information
-        if day_title.strip().startswith(f"Day {day_number}"):
-            # Title already includes day info (e.g., "Day 1: Arrival"), use as-is
-            return day_title
-        else:
-            # Title is just a description, prepend day info (e.g., "Arrival" -> "Day 1: Arrival")
-            return f"Day {day_number}: {day_title}"
     
     def _display_day_activities(self, day_plan: dict) -> None:
         """Display activities for a day."""
