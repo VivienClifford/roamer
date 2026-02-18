@@ -1,8 +1,12 @@
 import streamlit as st
 import os
 import logging
+from dotenv import load_dotenv
 from agents.coordinator_agent import CoordinatorAgent
 from agents.display import display_travel_plan
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
