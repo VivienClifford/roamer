@@ -13,7 +13,13 @@ class CoordinatorAgent(BaseAgent):
     
     PARSE_TRAVEL_DETAILS_PROMPT = """Extract travel planning details from: '{user_input}'
 
-Identify: location (required), duration (days, default 3), interests (list), budget (low/medium/high), travel_type (solo/couple/family/group)
+Identify all mentioned details: location, duration (days), interests (list), budget (low/medium/high), travel_type (solo/couple/family/group)
+
+Provide defaults for any missing critical fields:
+- duration: default to 3 days if not mentioned
+- interests: default to ["culture", "food", "adventure"] if not mentioned  
+- budget: default to "medium" if not mentioned
+- travel_type: default to "solo" if not mentioned
 
 Example: {{"location": "Tokyo", "duration": 5, "interests": ["temples", "sushi"], "budget": "medium", "travel_type": "solo"}}"""
     

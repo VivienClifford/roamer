@@ -6,18 +6,20 @@ Roamer is an intelligent travel planning application that uses a multi-agent AI 
 
 ### 🤖 Multi-Agent Architecture
 
-1. **Attraction Agent** - Recommends attractions and activities based on user interests
-2. **Logistic Agent** - Plans daily itineraries and provides transportation suggestions
-3. **Coordinator Agent** - Orchestrates all agents to create cohesive travel plans
+1. **Conversation Manager** - Gathers and validates travel information, asks clarifying follow-up questions
+2. **Attraction Agent** - Recommends attractions and activities based on user interests
+3. **Logistic Agent** - Plans daily itineraries and provides transportation suggestions
+4. **Coordinator Agent** - Orchestrates planning agents to create cohesive travel plans
 
 ### ✨ Key Capabilities
 
-- 📍 Intelligent destination analysis
-- 🎯 Interest-based attraction recommendations
-- 📅 Day-by-day itinerary planning
-- 🚗 Local transportation guidance
-- 💬 Conversational interface powered by Streamlit
-- 🤖 LLM-powered intelligence using OpenAI GPT
+- � **Interactive prompting** - Asks follow-up questions if information is incomplete
+- 📍 **Intelligent destination analysis** - Parses travel requests and validates required fields
+- 🎯 **Interest-based recommendations** - Suggests attractions matching your interests
+- 📅 **Day-by-day planning** - Creates detailed itineraries with timings
+- 🚗 **Transportation guidance** - Provides local transport options
+- 🎨 **Conversational Streamlit UI** - Natural chat-based interaction
+- 🤖 **LLM-powered** - Uses OpenAI GPT for intelligent analysis
 
 ## Prerequisites
 
@@ -80,35 +82,60 @@ Run specific test file:
 uv run pytest tests/test_base_agent.py -v
 ```
 
-### How to Use
+### What Information Roamer Needs
 
-1. **Enter your travel request** in the chat input
-2. **Include details** such as:
-   - Destination (e.g., "Tokyo")
-   - Duration (e.g., "5 days")
-   - Interests (e.g., "temples, sushi, technology")
-3. **Get your personalized plan** including:
-   - Top attractions matching your interests
-   - Day-by-day itinerary with timings
-   - Transportation recommendations
-   - Meal suggestions
+For a personalized itinerary, Roamer requires:
+- **Destination** (required) - Where do you want to go?
+- **Duration** (required) - How many days will you stay?
+- **Interests** (required) - What activities interest you?
+- **Budget** (optional) - low, medium, or high
+- **Travel type** (optional) - solo, couple, family, or group
 
-### Example Queries
+### Example Conversations
 
-- "I want to visit Paris for 4 days. I love art, museums, and French cuisine."
-- "Planning a week in Barcelona. Interested in beaches, architecture, and nightlife."
-- "3-day trip to Tokyo. Love hiking, anime, and street food."
+**Example 1 - Minimal to Complete**
+```
+You: Paris
+Roamer: How long will you stay?
+You: 4 days, museums and cafes
+Roamer: ✨ Generates 4-day Parisian itinerary
+```
+
+**Example 2 - Complete Request**
+```
+You: I want to visit Tokyo for 5 days. I love temples, sushi, and technology.
+Roamer: ✨ Generates personalized 5-day Tokyo itinerary
+```
+
+**Example 3 - Multi-turn with Multiple Follow-ups**
+```
+You: Barcelona
+Roamer: How many days will you be there?
+You: A week
+Roamer: What are your main interests?
+You: Beaches, architecture, and nightlife
+Roamer: ✨ Generates comprehensive 7-day Barcelona plan
+```
 
 ## Architecture
 
-The application uses a coordinator pattern where:
+Roamer uses a multi-stage processing pipeline:
 
-1. **User Input** → CoordinatorAgent processes the travel request
-2. **Parsing** → Extracts location, duration, interests from user input
-3. **Attraction Recommendations** → AttractionAgent finds relevant attractions
-4. **Itinerary Planning** → LogisticAgent creates day-by-day plans
-5. **Transportation** → LogisticAgent provides transport options
-6. **Formatting** → Results are compiled into a readable travel plan
+1. **Conversation Manager** → Validates user input and gathers missing information
+   - Parses travel details (location, duration, interests, etc.)
+   - Analyzes what information is provided vs. missing
+   - Generates contextual follow-up questions if needed
+   - Validates complete information before proceeding
+
+2. **Coordinator Agent** → Orchestrates planning once all info is complete
+   - Requests attraction recommendations from AttractionAgent
+   - Creates itinerary with LogisticAgent
+   - Gathers transportation suggestions
+   - Compiles results into structured travel plan
+
+3. **Supporting Agents**
+   - **AttractionAgent** → Finds attractions matching user interests
+   - **LogisticAgent** → Creates day-by-day itineraries and transport options
 
 ## API Integration
 
@@ -141,7 +168,6 @@ Users will receive friendly error messages to help them correct their input.
 ## Future Enhancements
 
 - [ ] Real-time flight and hotel pricing integration
-- [ ] Multi-language support
 - [ ] User preference learning and history
 - [ ] Integration with booking platforms (Google Flights, Airbnb)
 - [ ] Weather forecasting for destinations

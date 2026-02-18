@@ -19,10 +19,6 @@ IMPORTANT: For each day's "title" field, provide ONLY the main activity or theme
 
 JSON structure: {{"days": [{{"day_number": "string", "title": "string", "activities": [{{"time": "HH:MM", "activity": "string", "duration": "string"}}], "meals": {{"breakfast": "string", "lunch": "string", "dinner": "string"}}, "notes": "string"}}]}}"""
 
-    TRANSPORTATION_PROMPT = """Provide practical transportation tips for visiting {location}. Include best ways to get around, costs, apps, and safety tips.
-
-JSON structure: {{"transportation": [{{"method": "string", "description": "string", "cost_estimate": "string like $10-20/day", "recommended_for": "string"}}]}}"""
-
     def create_itinerary(self, location: str, duration: int, attractions: dict) -> dict:
         """
         Create a detailed daily itinerary based on attractions.
@@ -56,6 +52,10 @@ JSON structure: {{"transportation": [{{"method": "string", "description": "strin
             result.setdefault("days", [])
         
         return result
+
+    TRANSPORTATION_PROMPT = """Provide practical transportation tips for visiting {location}. Include best ways to get around, costs, apps, and safety tips.
+
+JSON structure: {{"transportation": [{{"method": "string", "description": "string", "cost_estimate": "string like $10-20/day", "recommended_for": "string"}}]}}"""
 
     def get_transportation_suggestions(self, location: str) -> dict:
         """
