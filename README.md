@@ -88,7 +88,6 @@ For a personalized itinerary, Roamer requires:
 - **Destination** (required) - Where do you want to go?
 - **Duration** (required) - How many days will you stay?
 - **Interests** (required) - What activities interest you?
-- **Budget** (optional) - low, medium, or high
 - **Travel type** (optional) - solo, couple, family, or group
 
 ### Example Conversations
