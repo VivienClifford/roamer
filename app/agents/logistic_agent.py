@@ -1,6 +1,6 @@
-from agents.base_agent import BaseAgent
-from config.config import DEFAULT_TEMPERATURE, TOKENS_ITINERARY, TOKENS_TRANSPORT, SYSTEM_TRAVEL_PLANNER, SYSTEM_LOGISTIC_EXPERT
-from agents.validation import ResponseValidator
+from app.agents.base_agent import BaseAgent
+from app.config.config import DEFAULT_TEMPERATURE, TOKENS_ITINERARY, TOKENS_TRANSPORT, SYSTEM_TRAVEL_PLANNER, SYSTEM_LOGISTIC_EXPERT
+from app.agents.validation import ResponseValidator
 import json
 import logging
 

@@ -5,7 +5,7 @@ from typing import Optional
 from urllib import response
 from openai import OpenAI
 
-from config.config import DEFAULT_MODEL
+from app.config.config import DEFAULT_MODEL
 
 logger = logging.getLogger(__name__)
 

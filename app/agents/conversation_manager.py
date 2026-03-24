@@ -2,7 +2,8 @@
 
 import logging
 from typing import Optional, List, Dict, Tuple
-from agents.base_agent import BaseAgent
+from app.agents.base_agent import BaseAgent
+from app.config.config import TOKENS_PARSING
 
 logger = logging.getLogger(__name__)
 
@@ -82,7 +83,6 @@ Input: "Barcelona, 3 days, love hiking"
         Returns:
             Dictionary with extracted location, duration, and interests (null for missing fields)
         """
-        from config.config import TOKENS_PARSING, SYSTEM_TRAVEL_DETAILS
         
         prompt = self.PARSE_TRAVEL_DETAILS_PROMPT.format(user_input=user_input)
         

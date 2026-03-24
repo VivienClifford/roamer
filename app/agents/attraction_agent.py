@@ -1,6 +1,6 @@
-from agents.base_agent import BaseAgent
-from config.config import DEFAULT_TEMPERATURE, TOKENS_ATTRACTION, SYSTEM_TRAVEL_GUIDE
-from agents.validation import ResponseValidator
+from app.config.config import DEFAULT_TEMPERATURE, TOKENS_ATTRACTION, SYSTEM_TRAVEL_GUIDE
+from app.agents.base_agent import BaseAgent
+from app.agents.validation import ResponseValidator
 import logging
 
 logger = logging.getLogger(__name__)

@@ -1,9 +1,9 @@
 import logging
 from typing import Optional
-from agents.base_agent import BaseAgent
-from agents.attraction_agent import AttractionAgent
-from agents.logistic_agent import LogisticAgent
-from config.config import TOKENS_PARSING, SYSTEM_TRAVEL_DETAILS
+from app.agents.base_agent import BaseAgent
+from app.agents.attraction_agent import AttractionAgent
+from app.agents.logistic_agent import LogisticAgent
+from app.config.config import TOKENS_PARSING, SYSTEM_TRAVEL_DETAILS
 
 logger = logging.getLogger(__name__)
 

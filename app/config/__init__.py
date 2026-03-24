@@ -1,5 +1,5 @@
 """Configuration module."""
-from config.config import (
+from app.config.config import (
     DEFAULT_MODEL,
     DEFAULT_TEMPERATURE,
     TOKENS_ATTRACTION,
